@@ -1,0 +1,21 @@
+.product-container {
+    flex-direction: column;
+    display: flex;
+    gap: 4px;
+}
+
+.product-img {
+    border-radius: 0.5rem;
+    width: 250px;
+    object-fit: fill;
+}
+
+.product-info {
+    flex-direction: column;
+    display: flex;
+    gap: 2px;
+}
+
+.product-info p {
+    margin: 0;
+}

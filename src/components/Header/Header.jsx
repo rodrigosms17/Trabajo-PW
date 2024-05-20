@@ -1,21 +1,23 @@
 import './Header.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <>
             <div className="top-bar">
                 <section className="izquierda">
-                <h1>La Tiendita de Don Pepe</h1>
-                <a className="left" href="#mas-vendidos">Más Vendidos</a>
-                <a className="left" href="#nuevos">Nuevos</a>
-                <a className="left" href="#ofertas">Ofertas</a>
+                <h1><Link style={{ textDecoration: "none", color: "black" }} href="/">La Tiendita de Don Pepe</Link></h1>
+                <Link className="left" href="mas-vendidos">Más Vendidos</Link>
+                <Link className="left" href="nuevos">Nuevos</Link>
+                <Link className="left" href="ofertas">Ofertas</Link>
                 </section>
                 <div className="separacion">
-                    <a className="right" href="#ayuda">Ayuda</a>
-                    <a>
+                    <Link className="right" to="cart">Cart</Link>
+                    <Link className="right" href="ayuda">Ayuda</Link>
+                    <Link>
                         <button className="MiCuentaButton">Mi Cuenta</button>
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className="search-bar">
