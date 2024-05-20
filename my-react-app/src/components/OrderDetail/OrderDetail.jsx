@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './OrderDetail.css';
 
 const OrderDetail = () => {
   const { id } = useParams();
