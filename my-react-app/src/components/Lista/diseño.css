@@ -1,0 +1,74 @@
+
+.pantalla{
+    margin-top: 20px;
+    display: flex  ;
+    background-color: rgb(182, 173, 173);
+    height: 100%;
+}
+
+.listado{
+    background-color: white;
+    margin: 50px;
+    width: 280px;
+    height: 500px;
+}
+.listado ul{
+  margin-top: 5px;
+  list-style-type: none; 
+  padding: 10px; 
+}
+.listado ul li {
+  padding-top: 9px;
+  line-height: 1.5;
+  padding-left: 20px;
+}
+.modificar{
+    margin: 50px;
+    width: 100%;
+    height: 300px;
+    
+  }
+
+
+.dashboard{ 
+    margin-top: 20px;
+    display: flex;
+    gap:60px ;
+    justify-content: center;
+  }
+.modificar > header{
+  background-color: antiquewhite;
+  margin-top: 20px;
+  padding: 10px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+}
+
+.modificar >header >a{
+    width: 200px;
+    height: 20px;
+    margin-top: 16px;
+    background-color: black;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+.dashboard >div{
+  background-color: antiquewhite;
+  width: 200px;
+  height: 100px;
+  text-align: center;
+}
+
+.modificar >input{
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 100%;
+    padding-right: 15px;
+}
