@@ -1,22 +1,49 @@
 import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Footer from './components/Footer/Footer'
+import NotFound from './pages/NotFound.jsx'
+import ContactUs from './pages/ContactUs.jsx'
+import { CartPage } from './pages/CartPage'
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import './App.css'
 
-function App() {
+const router = createBrowserRouter([{
+  element: (
 
-  return (
     <>
       <header>
         <Header />
       </header>
-      <main>
-        <Main />
-      </main>
+      <Outlet />
       <footer>
         <Footer />
       </footer>
+    </>
+  ),
+  children: [
+    {
+      path: '/',
+      element: <Main />,
+      errorElement: <NotFound />
+    },
+    {
+      path: '/contactus',
+      element: <ContactUs />
+    },
+    {
+      path: '/cart',
+      element: <CartPage />
+    }
+  ]
+}])
+
+function App() {
+  return (
+    <>
+      <main>
+        <RouterProvider router={router} />
+      </main>
     </>
   )
 }
