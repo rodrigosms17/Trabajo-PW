@@ -2,17 +2,41 @@ import { createContext, useContext, useState } from "react"
 
 const CartContext = createContext(undefined);
 
-const TEST_PRODUCTS = [
-  { id: 0, label: "Foo", price: 250, img: "https://cdn.thewirecutter.com/wp-content/media/2023/11/aio-computer-2048px-231515-3x2-1-1.jpg?auto=webp&quality=75&width=1024" }
-]
-
 export function CartProvider({ children }) {
-  const [cartProducts, setCartProducts] = useState(TEST_PRODUCTS);
+  const [cartProducts, setCartProducts] = useState([]);
+
+  const changeProductQuantity = (product, newQuantity) => {
+    const productInCart = !!cartProducts.find((p) => p.id === product.id)
+    if (!productInCart) {
+      return;
+    }
+
+    setCartProducts((products) => products.map((p) => p.id === product.id ? { ...product, quantity: newQuantity } : p))
+  }
+
+  const addToCart = (product) => {
+    const i = cartProducts.findIndex((p) => p.id === product.id)
+    const productAlreadyInCart = i !== -1;
+
+    if (productAlreadyInCart) {
+      setCartProducts((products) => {
+        products[i] = { ...product, quantity: products[i].quantity + 1 };
+        return products;
+      })
+    } else {
+      setCartProducts((products) => [...products, { ...product, quantity: 1 }])
+    }
+  }
+
+  const removeFromCart = (productWithId) => {
+    setCartProducts((products) => products.filter(p => p.id !== productWithId.id))
+  }
 
   return <CartContext.Provider value={{
     cartProducts,
-    addToCart: (product) => setCartProducts((...products) => setCartProducts([...products, product])),
-    removeFromCart: (product) => setCartProducts((...products) => setCartProducts(products.filter((p) => p.id !== product.id)))
+    changeProductQuantity,
+    addToCart,
+    removeFromCart,
   }}>{children}</CartContext.Provider>
 }
 
