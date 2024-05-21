@@ -11,7 +11,6 @@ import { AuthProvider } from './AuthContext.jsx'
 import './index.css'
 import Userlog from './pages/UserLog/Userlog.jsx'
 
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -36,14 +35,15 @@ const router = createBrowserRouter([
   },
   {
     path: '/userlog',
-    element: <Userlog />
+    element: <Userlog />},
+  { 
+    path:'/contactus',
+    element: <ContactUs />
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}/>
-    </AuthProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )

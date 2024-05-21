@@ -2,7 +2,6 @@ import './Header.css';
 import React from 'react';
 
 const Header = () => {
-
     return (
         <>
             <div className="top-bar">
