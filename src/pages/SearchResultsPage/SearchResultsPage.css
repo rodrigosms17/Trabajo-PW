@@ -4,9 +4,19 @@
     height: calc(80vh - 77px);
 }
 
-
 .search-results-container h2 {
     margin-bottom: 20px;
+}
+
+.sort-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.ordenar {
+    font-size: 18px;
+    
 }
 
 .results-table {
@@ -31,4 +41,9 @@
 
 .results-table tr:hover {
     background-color: #f1f1f1;
+}
+
+.results-table .precio {
+    font-size: 1.5em;
+    font-weight: bold;
 }
