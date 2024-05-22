@@ -25,6 +25,8 @@ header {
     background-color: #333;
     color: rgb(0, 0, 0);
     padding: 0px;
+    height: 77px;
+
 }
 
 .top-bar {
@@ -41,7 +43,6 @@ header {
 .izquierda {
     display: flex;
     flex-wrap: nowrap;
-    
 }
 
 .separacion {
@@ -73,6 +74,7 @@ header {
     justify-content: center;
     padding: 5px;
     background-color: #e2dfdf;
+    width: 100%;
 }
 
 .search-bar input {
