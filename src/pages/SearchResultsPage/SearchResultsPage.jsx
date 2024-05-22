@@ -51,7 +51,7 @@ const SearchResultsPage = () => {
       <h2>Resultados de la búsqueda para "{searchTerm}":</h2>
       <div className="sort-container">
         <label className="ordenar" htmlFor="sort">Ordenar por:</label>
-        <select id="sort" value={sortCriteria} onChange={handleSortChange}>
+        <select className="ordenarBot" id="sort" value={sortCriteria} onChange={handleSortChange}>
           <option value="nombre">Nombre</option>
           <option value="precio">Precio</option>
         </select>
