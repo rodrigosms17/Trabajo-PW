@@ -3,6 +3,7 @@ import Main from './components/Main/Main'
 import Footer from './components/Footer/Footer'
 import NotFound from './pages/NotFound.jsx'
 import ContactUs from './pages/ContactUs.jsx'
+import ListaSerie from './pages/ListaSerie.jsx'
 import { CartPage } from './pages/CartPage'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([{
     {
       path: '/cart',
       element: <CartPage />
+    },
+    {
+      path:'/listaserie',
+      element: <ListaSerie/>
     }
   ]
 }])
