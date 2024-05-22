@@ -6,7 +6,7 @@ export default function Header(){
 
     return<>
     <header style={estiloo}>
-        Tienda
+        <h1>Tienda</h1>
     </header>
     </>
 

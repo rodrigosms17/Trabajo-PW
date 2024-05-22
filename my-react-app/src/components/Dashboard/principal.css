@@ -1,0 +1,31 @@
+.muestra {
+  width: 60%;
+  height: 300px;
+}
+
+.muestra > header {
+  display: flex;
+  justify-content: space-between;
+  background-color: antiquewhite;
+  margin-top: 20px;
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+.dashboard div {
+  text-align: center;
+}
+
+.calendario-container {
+  margin-top: 5px; /* Ajuste del margen superior */
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
