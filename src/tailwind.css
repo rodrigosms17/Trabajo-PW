@@ -2,12 +2,12 @@
   display: flex
 }
 
-.aspect-square {
-  aspect-ratio: 1 / 1
+.table {
+  display: table
 }
 
-.h-32 {
-  height: 8rem
+.aspect-square {
+  aspect-ratio: 1 / 1
 }
 
 .w-32 {
