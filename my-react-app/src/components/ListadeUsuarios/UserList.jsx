@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './UserList.css';
+import './UserList.css'; // Importa el archivo CSS
 
 const UserList = () => {
   const users = [
@@ -9,38 +9,46 @@ const UserList = () => {
   ];
 
   return (
-    <div>
-      <h1>Usuarios registrados</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Correo</th>
-            <th>Fecha de Registro</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.nombre}</td>
-              <td>{user.apellido}</td>
-              <td>{user.correo}</td>
-              <td>{user.fechaRegistro}</td>
-              <td>{user.estado}</td>
-              <td>
-                <Link to={`/admin/users/${user.id}`}>Ver</Link>
-                {' | '}
-                <button onClick={() => alert('Cambiar estado')}>{user.estado === 'Activo' ? 'Desactivar' : 'Activar'}</button>
-              </td>
+    <div className="container">
+      <nav className="sidebar">
+        <ul>
+          <li><Link to="/admin/orders">Lista de Órdenes</Link></li>
+          <li><Link to="/admin/users">Lista de Usuarios</Link></li>
+        </ul>
+      </nav>
+      <div className="content table-container">
+        <h1>Usuarios registrados</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Correo</th>
+              <th>Fecha de Registro</th>
+              <th>Estado</th>
+              <th>Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.nombre}</td>
+                <td>{user.apellido}</td>
+                <td>{user.correo}</td>
+                <td>{user.fechaRegistro}</td>
+                <td>{user.estado}</td>
+                <td className="actions">
+                  <Link to={`/admin/users/${user.id}`}>Ver</Link>
+                  {' | '}
+                  <button onClick={() => alert('Cambiar estado')}>{user.estado === 'Activo' ? 'Desactivar' : 'Activar'}</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

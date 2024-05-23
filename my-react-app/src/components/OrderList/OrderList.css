@@ -1,54 +1,83 @@
-
-.table-container {
+.container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
     padding: 20px;
-}
-
-h1 {
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .table-container {
+    padding: 20px;
+  }
+  
+  h1 {
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-table {
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-}
-
-table, th, td {
+  }
+  
+  table, th, td {
     border: 1px solid #ccc;
-}
-
-th, td {
+  }
+  
+  th, td {
     padding: 10px;
     text-align: left;
-}
-
-th {
+  }
+  
+  th {
     background-color: #f4f4f4;
-}
-
-tr:nth-child(even) {
+  }
+  
+  tr:nth-child(even) {
     background-color: #f9f9f9;
-}
-
-.actions a {
+  }
+  
+  .actions a {
     margin-right: 10px;
     text-decoration: none;
     color: #007bff;
-}
-
-.actions a:hover {
+  }
+  
+  .actions a:hover {
     text-decoration: underline;
-}
-
-.actions button {
+  }
+  
+  .actions button {
     background-color: #dc3545;
     color: #fff;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-}
-
-.actions button:hover {
+  }
+  
+  .actions button:hover {
     background-color: #c82333;
-}
+  }
+  
