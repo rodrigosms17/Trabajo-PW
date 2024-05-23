@@ -1,12 +1,12 @@
-import React from 'react';
-import { CartProduct } from './components/CartProduct/CartProduct.jsx';
-import { Separator } from '../../components/Separator';
-import { useCart } from '../../contexts/useCart';
-import { Link } from 'react-router-dom';
-import './cart-page.css';
+import { CartProduct } from "./components/CartProduct";
+import { Separator } from "../../components/Separator";
+import { useCart } from "../../contexts/useCart";
+
+import "./cart-page.css";
+import { Link } from "react-router-dom";
 
 export function CartPage() {
-  const { cartProducts } = useCart();
+  const { cartProducts, savedProducts, moveToCart, moveToSaved } = useCart();
 
   const totalPrice = cartProducts
     .map((product) => product.price * product.quantity)
@@ -33,6 +33,9 @@ export function CartPage() {
         <Separator>
           <h2>Guardado para después</h2>
         </Separator>
+        {Object.entries(savedProducts).map(([id, product]) => (
+          <CartProduct key={id} product={product} type="saved" />
+        ))}
       </div>
     </div>
   );
