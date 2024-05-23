@@ -31,7 +31,6 @@ h2{
 }
 
 .SeriesTodo{
-    background-color: rgb(234, 234, 234);
     margin-left: 40px;
     height: 400px;
     width: 100%;
@@ -55,18 +54,15 @@ h2{
     border-radius: 4px 4px 4px 4px;
 }
 
-.tabla{
-    background-color: white;
+#tabla{
     width: 100%;
     height: 350px;
+    background-color: white;
 
 }
 
 .columna td{
-    padding-left: 10px;
-    padding-bottom: 5px;
-    border: 1px solid gainsboro;
-    border-radius: 2px 2px 2px 2px;
+    padding: 5px;
 }
 .columna th{
     padding-left: 10px;
