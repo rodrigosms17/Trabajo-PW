@@ -1,5 +1,5 @@
-// src/components/RecuperacionPassword.jsx
 import React, { useState } from 'react';
+import './Recover-Password.css';
 
 const RecoverPassword = () => {
     const [email, setEmail] = useState('');
@@ -10,21 +10,23 @@ const RecoverPassword = () => {
     };
 
     return (
-        <div>
-            <h2>Recuperación de Contraseña</h2>
-            <form onSubmit={handleRecuperacion}>
-                <label>
-                    Correo electrónico:
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </label>
-                <br />
-                <button type="submit">Enviar</button>
-            </form>
+        <div className="recover-password-body">
+            <div className="recover-password-container">
+                <h2 className="recover-password-title">Forgot Password?</h2>
+                <form onSubmit={handleRecuperacion} className="recover-password-form">
+                    <label>
+                        Correo electrónico:
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <br />
+                    <button type="submit" className="button">Enviar</button>
+                </form>
+            </div>
         </div>
     );
 };
