@@ -1,25 +1,25 @@
 main {
-    padding: 0px;
+    padding: 0;
     background-color: #e2dfdf;
 }
 
 .featured-collections {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .lineaSep {
     background-color: black;
     color: black;
-    margin-top: 0px;
-    padding-top: 0px;
+    margin-top: 0;
+    padding-top: 0;
     font-size: 5px;
 }
 
 h2 {
     padding-top: 5px;
     padding-bottom: 5px;
-    margin: 0px;
+    margin: 0;
     padding-left: 10px;
     font-size: 18px;
     background-color: #e2dfdf;

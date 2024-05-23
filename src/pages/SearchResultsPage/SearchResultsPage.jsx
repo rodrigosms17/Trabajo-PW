@@ -3,22 +3,23 @@ import { useLocation } from 'react-router-dom';
 import './SearchResultsPage.css';
 
 const productos = [
-  { id: 1, nombre: "Toyota Corolla", marca: "Toyota", precio: 20000 },
-  { id: 2, nombre: "Honda Civic", marca: "Honda", precio: 22000 },
-  { id: 3, nombre: "Toyota Camry", marca: "Toyota", precio: 25000 },
-  { id: 4, nombre: "Ford Focus", marca: "Ford", precio: 18000 },
-  { id: 5, nombre: "Toyota Prius", marca: "Toyota", precio: 24000 },
-  { id: 6, nombre: "Chevrolet Malibu", marca: "Chevrolet", precio: 23000 },
-  { id: 7, nombre: "Nissan Altima", marca: "Nissan", precio: 21000 },
-  { id: 8, nombre: "Mazda 3", marca: "Mazda", precio: 19000 },
-  { id: 9, nombre: "Subaru Impreza", marca: "Subaru", precio: 26000 },
-  { id: 10, nombre: "Volkswagen Golf", marca: "Volkswagen", precio: 27000 },
-  { id: 11, nombre: "Hyundai Elantra", marca: "Hyundai", precio: 19500 },
-  { id: 12, nombre: "Kia Optima", marca: "Kia", precio: 20000 },
-  { id: 13, nombre: "BMW 3 Series", marca: "BMW", precio: 35000 },
-  { id: 14, nombre: "Mercedes-Benz C-Class", marca: "Mercedes-Benz", precio: 40000 },
-  { id: 15, nombre: "Audi A4", marca: "Audi", precio: 37000 }
+  { id: 1, nombre: "Nike Air Max", marca: "Nike", precio: 120 },
+  { id: 2, nombre: "Adidas Ultraboost", marca: "Adidas", precio: 150 },
+  { id: 3, nombre: "Puma RS-X", marca: "Puma", precio: 100 },
+  { id: 4, nombre: "Reebok Classic Leather", marca: "Reebok", precio: 80 },
+  { id: 5, nombre: "New Balance 574", marca: "New Balance", precio: 90 },
+  { id: 6, nombre: "Vans Old Skool", marca: "Vans", precio: 70 },
+  { id: 7, nombre: "Converse Chuck Taylor All Star", marca: "Converse", precio: 60 },
+  { id: 8, nombre: "Under Armour HOVR Phantom", marca: "Under Armour", precio: 130 },
+  { id: 9, nombre: "Asics Gel-Kayano", marca: "Asics", precio: 160 },
+  { id: 10, nombre: "Skechers Go Walk", marca: "Skechers", precio: 75 },
+  { id: 11, nombre: "Fila Disruptor", marca: "Fila", precio: 110 },
+  { id: 12, nombre: "Salomon Speedcross", marca: "Salomon", precio: 140 },
+  { id: 13, nombre: "Brooks Ghost", marca: "Brooks", precio: 130 },
+  { id: 14, nombre: "Mizuno Wave Rider", marca: "Mizuno", precio: 140 },
+  { id: 15, nombre: "Saucony Jazz Original", marca: "Saucony", precio: 80 },
 ];
+
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);

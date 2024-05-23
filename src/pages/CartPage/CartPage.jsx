@@ -1,16 +1,16 @@
-import { CartProduct } from './components/CartProduct';
-import { Separator } from "../../components/Separator";
-import { useCart } from "../../contexts/useCart"
-
-import "./cart-page.css"
+import React from 'react';
+import { CartProduct } from './components/CartProduct/CartProduct.jsx';
+import { Separator } from '../../components/Separator';
+import { useCart } from '../../contexts/useCart';
 import { Link } from 'react-router-dom';
+import './cart-page.css';
 
 export function CartPage() {
   const { cartProducts } = useCart();
 
   const totalPrice = cartProducts
     .map((product) => product.price * product.quantity)
-    .reduce((partialSum, n) => partialSum + n, 0)
+    .reduce((partialSum, n) => partialSum + n, 0);
 
   return (
     <div>
@@ -19,8 +19,8 @@ export function CartPage() {
         <Separator>
           <h2>Items disponibles para Envío</h2>
         </Separator>
-        {Object.entries(cartProducts).map(([id, product]) => (
-          <CartProduct key={id} product={product} />
+        {cartProducts.map((product) => (
+          <CartProduct key={product.id} product={product} />
         ))}
         <div className="checkout-container">
           <h4>Total: S/ {totalPrice}</h4>
@@ -35,5 +35,6 @@ export function CartPage() {
         </Separator>
       </div>
     </div>
-  )
+  );
 }
+
