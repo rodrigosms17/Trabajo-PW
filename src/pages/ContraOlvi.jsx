@@ -9,11 +9,8 @@ const ContraOlvi = () => {
 
             
             <section class= "medio">
-<<<<<<< HEAD
-              <h3 class="tituloDC">Ingrese su correo para enviar la nueva contraseña</h3>
-=======
+             <h3 class="tituloDC">Ingrese su correo para enviar la nueva contraseña</h3>
               <h3 class="tituloDC">Ingrese su correo para enviar la contraseña</h3>
->>>>>>> 7494ea53084d8bd4bca399988b210e0c5cfaa9e4
               <input type="password" class="contraseña" placeholder="Email"></input>
               <button id="enviar">Enviar</button>
               <a href='' class="login">Regresar al Login</a>
