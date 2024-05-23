@@ -3,11 +3,37 @@ import { useCart } from "../../../../contexts/useCart";
 
 import "./cart-product.css";
 
-export function CartProduct({ product }) {
-  const { changeProductQuantity, removeFromCart } = useCart();
+export function CartProduct({ product, type }) {
+  const {
+    changeProductQuantity,
+    removeFromCart,
+    removeFromSaved,
+    moveToCart,
+    moveToSaved,
+  } = useCart();
   const [previewProductQuantity, setPreviewProductQuantity] = useState(
     product.quantity,
   );
+
+  const remove = () => {
+    if (type === "cart") {
+      removeFromCart(product);
+    }
+
+    if (type === "saved") {
+      removeFromSaved(product);
+    }
+  };
+
+  const move = () => {
+    if (type === "cart") {
+      moveToSaved(product);
+    }
+
+    if (type === "saved") {
+      moveToCart(product);
+    }
+  };
 
   return (
     <div className="product-container">
@@ -15,9 +41,12 @@ export function CartProduct({ product }) {
       <div className="product-info">
         <h3>{product.label}</h3>
         <div className="product-actions">
-          <button onClick={() => removeFromCart(product)}>Eliminar</button>
+          <button onClick={() => remove(product)}>Eliminar</button>
           <span>|</span>
-          <button>Guardar para después</button>
+          <button onClick={() => move(product)}>
+            {type === "cart" && "Guardar para después"}
+            {type === "saved" && "Mover al carrito"}
+          </button>
         </div>
       </div>
       <input

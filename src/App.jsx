@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import { CartPage } from "./pages/CartPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
+import { OrderPage } from "./pages/OrderPage";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import "./App.css";
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <CheckoutPage />,
+      },
+      {
+        path: "/order/:id",
+        element: <OrderPage />,
       },
     ],
   },

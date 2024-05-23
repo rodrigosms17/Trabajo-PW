@@ -6,6 +6,7 @@ export function CartProvider({ children }) {
   const [cartProducts, setCartProducts] = useState([
     { id: 0, label: "foo", price: 69, quantity: 1 },
   ]);
+  const [savedProducts, setSavedProducts] = useState([]);
 
   const changeProductQuantity = (product, newQuantity) => {
     const productInCart = !!cartProducts.find((p) => p.id === product.id);
@@ -40,13 +41,33 @@ export function CartProvider({ children }) {
     );
   };
 
+  const removeFromSaved = (productWithId) => {
+    setSavedProducts((products) =>
+      products.filter((p) => p.id !== productWithId.id),
+    );
+  };
+
+  const moveToCart = (product) => {
+    setSavedProducts((products) => products.filter((p) => p.id !== product.id));
+    setCartProducts((products) => [...products, product]);
+  };
+
+  const moveToSaved = (product) => {
+    setCartProducts((products) => products.filter((p) => p.id !== product.id));
+    setSavedProducts((products) => [...products, product]);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartProducts,
+        savedProducts,
         changeProductQuantity,
         addToCart,
         removeFromCart,
+        removeFromSaved,
+        moveToCart,
+        moveToSaved,
       }}
     >
       {children}
