@@ -1,16 +1,16 @@
-import { CartProduct } from './components/CartProduct';
+import { CartProduct } from "./components/CartProduct";
 import { Separator } from "../../components/Separator";
-import { useCart } from "../../contexts/useCart"
+import { useCart } from "../../contexts/useCart";
 
-import "./cart-page.css"
-import { Link } from 'react-router-dom';
+import "./cart-page.css";
+import { Link } from "react-router-dom";
 
 export function CartPage() {
-  const { cartProducts } = useCart();
+  const { cartProducts, savedProducts, moveToCart, moveToSaved } = useCart();
 
   const totalPrice = cartProducts
     .map((product) => product.price * product.quantity)
-    .reduce((partialSum, n) => partialSum + n, 0)
+    .reduce((partialSum, n) => partialSum + n, 0);
 
   return (
     <div>
@@ -20,7 +20,7 @@ export function CartPage() {
           <h2>Items disponibles para Envío</h2>
         </Separator>
         {Object.entries(cartProducts).map(([id, product]) => (
-          <CartProduct key={id} product={product} />
+          <CartProduct key={id} product={product} type="cart" />
         ))}
         <div className="checkout-container">
           <h4>Total: S/ {totalPrice}</h4>
@@ -33,7 +33,10 @@ export function CartPage() {
         <Separator>
           <h2>Guardado para después</h2>
         </Separator>
+        {Object.entries(savedProducts).map(([id, product]) => (
+          <CartProduct key={id} product={product} type="saved" />
+        ))}
       </div>
     </div>
-  )
+  );
 }
