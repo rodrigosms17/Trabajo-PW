@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import './OrderDetail.css';
 
 const OrderDetail = () => {
-  const { id } = useParams();
-  
+  const { id} = useParams();
+  //const { nombre} = useParams();
   // Datos de la orden inicial
   const initialOrder = {
     id: id,

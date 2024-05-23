@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './OrderList.css';
+//import { useParams, Link } from 'react-router-dom';
 
 const OrderList = () => {
+  //const {id} = useParams();
+  //const { } = useParams();
   const orders = [
     { id: 101, usuarioNombre: 'Juan', usuarioApellido: 'Perez', fecha: '2023-04-01', correo: 'juan@example.com', estado: 'Entregado' },
     { id: 102, usuarioNombre: 'Ana', usuarioApellido: 'Gomez', fecha: '2023-04-02', correo: 'ana@example.com', estado: 'Por enviar' },
@@ -10,7 +13,7 @@ const OrderList = () => {
 
   return (
     <div>
-      <h1>Órdenes</h1>
+      <h1>Lista de Órdenes</h1>
       <table>
         <thead>
           <tr>
