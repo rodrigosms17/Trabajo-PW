@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './UserList.css'; // Importa el archivo CSS
 
@@ -7,6 +7,14 @@ const UserList = () => {
     { id: 1, nombre: 'Juan', apellido: 'Perez', correo: 'juan@example.com', fechaRegistro: '2023-01-01', estado: 'Activo' },
     { id: 2, nombre: 'Ana', apellido: 'Gomez', correo: 'ana@example.com', fechaRegistro: '2023-02-01', estado: 'Inactivo' },
   ];
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredUsers = users.filter(user =>
+    user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.apellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.correo.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="container">
@@ -18,6 +26,13 @@ const UserList = () => {
       </nav>
       <div className="content table-container">
         <h1>Usuarios registrados</h1>
+        <input
+          type="text"
+          placeholder="Buscar usuarios..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
         <table>
           <thead>
             <tr>
@@ -31,7 +46,7 @@ const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
+            {filteredUsers.map(user => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.nombre}</td>

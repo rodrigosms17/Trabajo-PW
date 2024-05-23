@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './OrderList.css'; // Importa el archivo CSS
 
@@ -7,6 +7,14 @@ const OrderList = () => {
     { id: 101, usuarioNombre: 'Juan', usuarioApellido: 'Perez', fecha: '2023-04-01', correo: 'juan@example.com', estado: 'Entregado' },
     { id: 102, usuarioNombre: 'Ana', usuarioApellido: 'Gomez', fecha: '2023-04-02', correo: 'ana@example.com', estado: 'Por enviar' },
   ];
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredOrders = orders.filter(order =>
+    order.usuarioNombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    order.usuarioApellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    order.correo.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="container">
@@ -18,6 +26,13 @@ const OrderList = () => {
       </nav>
       <div className="content table-container">
         <h1>Órdenes</h1>
+        <input
+          type="text"
+          placeholder="Buscar órdenes..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
         <table>
           <thead>
             <tr>
@@ -31,7 +46,7 @@ const OrderList = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
+            {filteredOrders.map(order => (
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td>{order.usuarioNombre}</td>
