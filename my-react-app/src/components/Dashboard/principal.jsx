@@ -1,6 +1,6 @@
 import './principal.css';
 import React, { useState } from 'react';
-import Calendario from '../Calendario/calendario';
+import Calendario from './Calendario/calendario';
 
 const Principal = () => {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -12,7 +12,7 @@ const Principal = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setShowCalendar(false); // Oculta el calendario después de seleccionar una fecha (opcional)
+    setShowCalendar(false);
   };
 
   return (

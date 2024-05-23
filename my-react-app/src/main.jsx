@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Pagina from './Dashboard.jsx'
 import NotFound from './routes/NotFound.jsx'
-import Lista  from './Productos.jsx'
+import Lista  from '../src/Productos.jsx'
 import Agregar  from './Agregar.jsx'
-import Prueba from './components/tabla/Prueba.jsx'
+import Detalle from './Det_prod.jsx'
+
 import {
   createBrowserRouter,
   RouterProvider
@@ -27,9 +28,9 @@ const router = createBrowserRouter([
     errorElement:<NotFound/>
   },
   {
-    path:"/prueba",
-    element:<Prueba/>
-
+    path:"/Det-prod",
+    element:<Detalle/>,
+    errorElement:<NotFound/>
   }
 ])
 

@@ -1,12 +1,18 @@
 export default function Header(){
     const estiloo ={
-        margin: '9px',
-        marginLeft: '30px',
+        fontSize: '20px',
+        width:'100%',
+        backgroundColor:'white',
+        fontFamily:'Arial,sans-serif',
+        margin:'0px',
+        paddingLeft:'10px',
+        paddingBottom:'10px',
+        paddingTop:'25px'
     }
 
     return<>
-    <header style={estiloo}>
-        <h1>Tienda</h1>
+    <header >
+    <h2 style={estiloo}>TIENDA</h2>
     </header>
     </>
 
