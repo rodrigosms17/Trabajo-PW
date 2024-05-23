@@ -10,6 +10,10 @@
   aspect-ratio: 1 / 1
 }
 
+.min-h-\[100vh\] {
+  min-height: 100vh
+}
+
 .w-32 {
   width: 8rem
 }
