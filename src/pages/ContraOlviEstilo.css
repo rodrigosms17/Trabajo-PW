@@ -15,7 +15,7 @@ h2{
     padding-left: 30px;
 }
 
-.medio{
+#medio4{
         display: flex;
         flex-direction: column; /* Ordena los elementos hijos verticalmente */
         align-items: center; /* Centra los elementos horizontalmente */

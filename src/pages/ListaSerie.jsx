@@ -6,7 +6,7 @@ const ListaSerie = () => {
             <header>
             <h2>TIENDA</h2>
             </header>
-            <section class= "medio">
+            <section id= "medio1">
                 <article class="Admin">
                     <h3 class="admi">Admin</h3>
                     <ul type="none">

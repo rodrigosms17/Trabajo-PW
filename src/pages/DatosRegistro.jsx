@@ -8,7 +8,7 @@ const DatosRegistro = () => {
             </header>
 
             
-            <section class= "medio">
+            <section id= "medio3">
                 <article class="Registro">
                     <h3 class="admi">Mi Cuenta</h3>
                     <ul type="none">
