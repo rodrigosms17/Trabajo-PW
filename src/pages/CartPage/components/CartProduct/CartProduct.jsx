@@ -1,11 +1,13 @@
-import { useState } from "react"
-import { useCart } from "../../../../contexts/useCart"
+import { useState } from "react";
+import { useCart } from "../../../../contexts/useCart";
 
-import './cart-product.css'
+import "./cart-product.css";
 
 export function CartProduct({ product }) {
   const { changeProductQuantity, removeFromCart } = useCart();
-  const [previewProductQuantity, setPreviewProductQuantity] = useState(product.quantity);
+  const [previewProductQuantity, setPreviewProductQuantity] = useState(
+    product.quantity,
+  );
 
   return (
     <div className="product-container">
@@ -38,10 +40,10 @@ export function CartProduct({ product }) {
         <h3>Precio</h3>
         <p>S/ {product.price}</p>
       </div>
-      <div className="">
+      <div className="flex justify-between">
         <h3>Subtotal</h3>
         <p>S/ {product.price * product.quantity}</p>
       </div>
     </div>
-  )
+  );
 }
