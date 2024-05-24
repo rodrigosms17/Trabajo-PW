@@ -1,27 +1,30 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../../contexts/useCart";
+import { PRODUCTS } from "../../constants/products";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
 
-  // Simula obtener los detalles del producto
-  const product = {
-    id,
-    nombre: "Producto de Ejemplo",
-    price: 100,
-    description: "Descripción del producto",
-    img: "ruta-a-imagen.jpg",
-  };
+  const product = PRODUCTS.find((p) => p.id === Number(id));
 
   return (
-    <div>
+    <div className="flex flex-col text-center items-center">
       <h1>{product.nombre}</h1>
-      <img src={product.img} alt={product.nombre} />
+      <img
+        className="w-56 aspect-square object-cover rounded-2xl"
+        src={product.img}
+        alt={product.nombre}
+      />
       <p>{product.description}</p>
       <p>Precio: S/ {product.price}</p>
-      <button onClick={() => addToCart(product)}>Añadir al Carrito</button>
+      <button
+        className="px-8 py-4 bg-black rounded-md text-white border-0"
+        onClick={() => addToCart(product)}
+      >
+        Añadir al Carrito
+      </button>
     </div>
   );
 };
