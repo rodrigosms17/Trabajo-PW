@@ -6,7 +6,7 @@ import "./cart-page.css";
 import { Link } from "react-router-dom";
 
 export function CartPage() {
-  const { cartProducts, savedProducts, moveToCart, moveToSaved } = useCart();
+  const { cartProducts, savedProducts } = useCart();
 
   const totalPrice = cartProducts
     .map((product) => product.price * product.quantity)
@@ -20,7 +20,7 @@ export function CartPage() {
           <h2>Items disponibles para Envío</h2>
         </Separator>
         {cartProducts.map((product) => (
-          <CartProduct key={product.id} product={product} />
+          <CartProduct key={product.id} product={product} type="cart" />
         ))}
         <div className="checkout-container">
           <h4>Total: S/ {totalPrice}</h4>
@@ -33,11 +33,10 @@ export function CartPage() {
         <Separator>
           <h2>Guardado para después</h2>
         </Separator>
-        {Object.entries(savedProducts).map(([id, product]) => (
-          <CartProduct key={id} product={product} type="saved" />
+        {savedProducts.map((product) => (
+          <CartProduct key={product.id} product={product} type="saved" />
         ))}
       </div>
     </div>
   );
 }
-
