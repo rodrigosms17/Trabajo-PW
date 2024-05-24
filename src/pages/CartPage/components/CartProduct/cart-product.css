@@ -1,0 +1,30 @@
+.product-container {
+    background-color: white;
+    display: flex;
+    padding: 6px;
+}
+
+.product-img {
+    aspect-ratio: 1 / 1;
+}
+
+.product-info {
+    /* width: 100%; */
+    /* width: fit-content; */
+    flex: 1 1 0%;
+}
+
+.product-info h3 {
+    margin-top: 0;
+}
+
+.product-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.product-quantity {
+    width: 3rem;
+    justify-self: end;
+    align-self: flex-start;
+}
