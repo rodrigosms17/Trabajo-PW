@@ -37,6 +37,10 @@ import ListaSerie from "./pages/ListaSerie.jsx";
 import AgregarSerie from "./pages/AgregarSerie.jsx";
 import DatosRegistro from "./pages/DatosRegistro.jsx";
 import ContraOlvi from "./pages/ContraOlvi.jsx";
+import { DashboardPage } from "./pages/dashboard/DashboardPage";
+import { ProductsPage as DashboardProductsPage } from "./pages/dashboard/ProductsPage";
+import { ProductPage as DashboardProductPage } from "./pages/dashboard/ProductPage";
+import { AgregarProductoPage as DashboardAddProductPage } from "./pages/dashboard/AgregarProducto";
 import { Layout } from "./components/Layout";
 import { CartPage } from "./pages/CartPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
@@ -121,6 +125,22 @@ const router = createBrowserRouter([
       {
         path: "/datos-registro",
         element: <DatosRegistro />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardPage />,
+      },
+      {
+        path: "/dashboard/products",
+        element: <DashboardProductsPage />,
+      },
+      {
+        path: "/dashboard/products/:id",
+        element: <DashboardProductPage />,
+      },
+      {
+        path: "/dashboard/agregar",
+        element: <DashboardAddProductPage />,
       },
       {
         path: "/recover-password",

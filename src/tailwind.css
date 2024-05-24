@@ -36,6 +36,16 @@
   position: relative;
 }
 
+.mx-12 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .flex {
   display: flex;
 }
@@ -385,4 +395,33 @@ footer .segundo ul p {
 footer .tercero img {
   max-width: 150px;
   height: auto;
+}
+
+/* calendario.css */
+
+/* Estilos personalizados para el calendario */
+
+.react-datepicker {
+  font-size: 16px;
+}
+
+.react-datepicker__header {
+  background-color: #007bff;
+  color: white;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.react-datepicker__day:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+div.calendario-container {
+  top: 50px;
+  height: 10000px;
 }

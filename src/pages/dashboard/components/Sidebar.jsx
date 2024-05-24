@@ -1,0 +1,37 @@
+import { Link } from "react-router-dom";
+
+import "./sidebar.css";
+
+export function Sidebar() {
+  return (
+    <>
+      <div className="listado">
+        <ul>
+          Admin
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            {/* TODO */}
+            <Link to="/dashboard/users">Usuarios registrados</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/products">Productos</Link>
+          </li>
+          <li>
+            {/* TODO */}
+            <Link to="/dashboard/orders">Ordenes</Link>
+          </li>
+          <li>
+            {/* TODO */}
+            <Link to="/dashboard/products-">Productos más vendidos</Link>
+          </li>
+          <li>
+            {/* TODO */}
+            <Link to="/dashboard/series">Series</Link>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+}
