@@ -1,3 +1,31 @@
+// <<<<<<< HEAD
+// import React from 'react';
+// import Header from './components/Header/Header';
+// import Post from './components/Post/Post';
+// import './App.css';
+// import { useUser } from './context/User';
+//
+// function App() {
+//   const { user } = useUser();
+//
+//   const posts = [
+//
+//   ];
+//
+//   return (
+//     <>
+//       <Header />
+//       {user.usuario === 'admin' ? (
+//         // Si es administrador, redirigir a la página de lista de usuarios o Lista de Ordenes Ordenes
+//         <UserListPage />
+//       ) : (
+//         <div>
+//           {posts.map((item) => (
+//             <Post {...item} key={item.titulo} />
+//           ))}
+//         </div>
+//       )}
+// =======
 import Main from "./components/Main/Main";
 import NotFound from "./pages/NotFound.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
@@ -17,6 +45,12 @@ import SearchResultsPage from "./pages/SearchResultsPage/SearchResultsPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage/ProductDetailsPage";
 import { Providers } from "./providers";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+
+// admin pages
+import UserList from "./routes/UserList.jsx";
+import UserDetail from "./routes/UserDetail.jsx";
+import OrderList from "./routes/OrderList.jsx";
+import OrderDetail from "./routes/OrderDetail.jsx";
 
 import "./App.css";
 import "./tailwind.css";
@@ -95,6 +129,22 @@ const router = createBrowserRouter([
       {
         path: "/contraolvi",
         element: <ContraOlvi />,
+      },
+      {
+        path: "admin/users",
+        element: <UserList />,
+      },
+      {
+        path: "admin/users/:id",
+        element: <UserDetail />,
+      },
+      {
+        path: "admin/orders",
+        element: <OrderList />,
+      },
+      {
+        path: "admin/orders/:id",
+        element: <OrderDetail />,
       },
     ],
   },
