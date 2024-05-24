@@ -1,45 +1,63 @@
-import { Link } from "react-router-dom";
-
 import "./Header.css";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export const Header = () => {
+const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (searchQuery) {
+      navigate(`/search-results?query=${searchQuery}`);
+    }
+  };
+
   return (
     <>
-      <header className="top-bar">
+      <div className="top-bar">
         <section className="izquierda">
           <h1>
-            <Link style={{ textDecoration: "none", color: "black" }} href="/">
+            <Link style={{ textDecoration: "none", color: "black" }} to="/">
               La Tiendita de Don Pepe
             </Link>
           </h1>
-          <Link className="left" href="mas-vendidos">
+          <Link className="left" to="/mas-vendidos">
             Más Vendidos
           </Link>
-          <Link className="left" href="nuevos">
+          <Link className="left" to="/nuevos">
             Nuevos
           </Link>
-          <Link className="left" href="ofertas">
+          <Link className="left" to="/ofertas">
             Ofertas
           </Link>
         </section>
         <div className="separacion">
-          <Link className="right" to="cart">
+          <Link className="right" to="/cart">
             Cart
           </Link>
-          <Link className="right" href="ayuda">
+          <Link className="right" to="/ayuda">
             Ayuda
           </Link>
           <Link>
             <button className="MiCuentaButton">Mi Cuenta</button>
           </Link>
         </div>
-      </header>
-      <div className="search-bar">
-        <input type="text" placeholder="Buscar productos por nombre..." />
-        <button>Buscar</button>
+      </div>
+      <div>
+        <form className="search-bar" onSubmit={handleSearch}>
+          <input
+            className="search-bar"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Buscar productos por nombre..."
+          />
+          <button type="submit">Buscar</button>
+        </form>
       </div>
     </>
   );
 };
 
-export default Header;
+export { Header };

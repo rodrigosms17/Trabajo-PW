@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useCart } from "../../../../contexts/useCart";
 
-import "./cart-product.css";
-
 export function CartProduct({ product, type }) {
   const {
     changeProductQuantity,
@@ -36,11 +34,11 @@ export function CartProduct({ product, type }) {
   };
 
   return (
-    <div className="product-container">
-      <img src={product.img} className="product-img" />
-      <div className="product-info">
-        <h3>{product.label}</h3>
-        <div className="product-actions">
+    <div className="flex gap-4 bg-white p-4">
+      <img src={product.img} className="aspect-square" />
+      <div className="flex-1">
+        <h3>{product.nombre}</h3>
+        <div className="flex gap-4">
           <button onClick={() => remove(product)}>Eliminar</button>
           <span>|</span>
           <button onClick={() => move(product)}>
@@ -62,14 +60,14 @@ export function CartProduct({ product, type }) {
           setPreviewProductQuantity(newQuantity);
           changeProductQuantity(product, newQuantity);
         }}
-        className="product-quantity"
+        className="h-fit py-2 self-center"
         type="number"
       />
-      <div>
+      <div className="flex flex-col">
         <h3>Precio</h3>
         <p>S/ {product.price}</p>
       </div>
-      <div className="flex justify-between">
+      <div className="flex flex-col">
         <h3>Subtotal</h3>
         <p>S/ {product.price * product.quantity}</p>
       </div>

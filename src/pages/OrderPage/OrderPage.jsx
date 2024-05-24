@@ -4,15 +4,15 @@ import { Product } from "../../components/Product";
 const TEST_PRODUCTS = [
   {
     id: 0,
-    label: "Foo",
+    nombre: "Foo",
   },
   {
     id: 1,
-    label: "Bar",
+    nombre: "Bar",
   },
   {
     id: 2,
-    label: "Baz",
+    nombre: "Baz",
   },
 ];
 

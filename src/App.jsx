@@ -2,6 +2,9 @@ import Main from "./components/Main/Main";
 import NotFound from "./pages/NotFound.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
 import Login from "./pages/Login/Login.jsx";
+import Register from "./pages/Register/Register.jsx";
+import RecoverPassword from "./pages/Recover-Password/Recover-Password.jsx";
+import SearchPage from "./pages/SearchResultsPage/SearchResultsPage.jsx";
 import { Layout } from "./components/Layout";
 import { CartPage } from "./pages/CartPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
@@ -56,6 +59,18 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/recover-password",
+        element: <RecoverPassword />,
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
       },
     ],
   },

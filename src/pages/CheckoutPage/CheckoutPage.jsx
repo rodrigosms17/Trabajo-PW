@@ -152,7 +152,7 @@ export function CheckoutPage() {
               {cartProducts.map((product) => (
                 <div key={product.id} className="flex justify-between">
                   <p>
-                    {product.quantity} x {product.label}
+                    {product.quantity} x {product.nombre}
                   </p>
                   <p>S/. {(product.quantity ?? 1) * product.price}</p>
                 </div>

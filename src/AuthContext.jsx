@@ -1,7 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const UNPROTECTED_ROUTES = ["/", "/products"];
+const UNPROTECTED_ROUTES = [
+  "/product",
+  "/register",
+  "/login",
+  "/recover-password",
+  "/search",
+];
 
 const AuthContext = createContext();
 
@@ -22,12 +28,13 @@ const AuthProvider = ({ children }) => {
     let isProtectedRoute = true;
 
     for (const route of UNPROTECTED_ROUTES) {
-      if (location.pathname.startsWith(route)) {
+      if (location.pathname.startsWith(route) || location.pathname === "/") {
         isProtectedRoute = false;
+        break;
       }
     }
 
-    if (isProtectedRoute) {
+    if (isProtectedRoute && !user) {
       navigate("/login");
     }
   }, [location.pathname]);
