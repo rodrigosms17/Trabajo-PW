@@ -17,20 +17,15 @@ const Header = () => {
     <>
       <div className="top-bar">
         <section className="izquierda">
-          <h1>
-            <Link style={{ textDecoration: "none", color: "black" }} to="/">
-              La Tiendita de Don Pepe
-            </Link>
-          </h1>
-          <Link className="left" to="/mas-vendidos">
+          <Link style={{ textDecoration: "none", color: "black" }} to="/">
+            <h1 className="text-8xl">A-Shus</h1>
+          </Link>
+          <a className="left" href="#mas-vendidos">
             Más Vendidos
-          </Link>
-          <Link className="left" to="/nuevos">
+          </a>
+          <a className="left" href="#nuevos">
             Nuevos
-          </Link>
-          <Link className="left" to="/ofertas">
-            Ofertas
-          </Link>
+          </a>
         </section>
         <div className="separacion">
           <Link className="right" to="/cart">

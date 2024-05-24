@@ -6,9 +6,9 @@ export function Footer() {
   return (
     <footer>
       <div className="primero">
-        <h3>LA TIENDA DEL ABUELO</h3>
+        <h3>A-SHUS</h3>
         <p>@2010-2020</p>
-        <p> privacy-Terms</p>
+        <p>privacy-Terms</p>
       </div>
 
       <div className="segundo">
@@ -18,15 +18,14 @@ export function Footer() {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <a href="">Registro</a>
+            <Link to="/register">Registro</Link>
           </li>
           <li>
-            <a href=""> Carrito</a>
+            <Link to="/cart">Carrito</Link>
           </li>
         </ul>
 
         <ul>
-          {" "}
           <p>Productos</p>
           <li>Mas Vendidos</li>
           <li> Nuevos</li>
