@@ -1,0 +1,28 @@
+.lista {
+  margin: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.tabla {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tabla th,
+.tabla td {
+  padding: 10px;
+  width: calc(100% / 8);
+}
+
+.tabla th {
+  text-align: left;
+}
+
+.tabla a {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}

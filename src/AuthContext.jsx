@@ -11,6 +11,7 @@ const UNPROTECTED_ROUTES = [
   "/agregar-serie",
   "/datos-registro",
   "/contraolvi",
+  "/dashboard",
 ];
 
 const AuthContext = createContext();
