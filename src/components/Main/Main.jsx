@@ -24,7 +24,7 @@ const Main = () => {
               />
               <p>{producto.nombre}</p>
               <p>Marca: {producto.marca}</p>
-              <p>Precio: ${producto.precio.toLocaleString()}</p>
+              <p>Precio: ${producto.price.toLocaleString()}</p>
             </Link>
           ))}
         </div>
@@ -43,7 +43,7 @@ const Main = () => {
                 />
                 <p>{producto.nombre}</p>
                 <p>Marca: {producto.marca}</p>
-                <p>Precio: ${producto.precio.toLocaleString()}</p>
+                <p>Precio: ${producto.price.toLocaleString()}</p>
               </div>
             </Link>
           ))}
@@ -63,7 +63,7 @@ const Main = () => {
                 />
                 <p>{producto.nombre}</p>
                 <p>Marca: {producto.marca}</p>
-                <p>Precio: ${producto.precio.toLocaleString()}</p>
+                <p>Precio: ${producto.price.toLocaleString()}</p>
               </div>
             </Link>
           ))}
@@ -84,7 +84,7 @@ const Main = () => {
                 {/* Agregar imagen */}
                 <p>{producto.nombre}</p>
                 <p>Marca: {producto.marca}</p>
-                <p>Precio: ${producto.precio.toLocaleString()}</p>
+                <p>Precio: ${producto.price.toLocaleString()}</p>
               </div>
             </Link>
           ))}

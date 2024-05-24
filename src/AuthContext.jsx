@@ -7,6 +7,10 @@ const UNPROTECTED_ROUTES = [
   "/login",
   "/recover-password",
   "/search",
+  "/lista-serie",
+  "/agregar-serie",
+  "/datos-registro",
+  "/contraolvi",
 ];
 
 const AuthContext = createContext();

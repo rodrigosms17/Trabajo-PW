@@ -5,6 +5,10 @@ import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
 import RecoverPassword from "./pages/Recover-Password/Recover-Password.jsx";
 import SearchPage from "./pages/SearchResultsPage/SearchResultsPage.jsx";
+import ListaSerie from "./pages/ListaSerie.jsx";
+import AgregarSerie from "./pages/AgregarSerie.jsx";
+import DatosRegistro from "./pages/DatosRegistro.jsx";
+import ContraOlvi from "./pages/ContraOlvi.jsx";
 import { Layout } from "./components/Layout";
 import { CartPage } from "./pages/CartPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
@@ -71,6 +75,26 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage />,
+      },
+      {
+        path: "/lista-serie",
+        element: <ListaSerie />,
+      },
+      {
+        path: "/agregar-serie",
+        element: <AgregarSerie />,
+      },
+      {
+        path: "/datos-registro",
+        element: <DatosRegistro />,
+      },
+      {
+        path: "/recover-password",
+        element: <RecoverPassword />,
+      },
+      {
+        path: "/contraolvi",
+        element: <ContraOlvi />,
       },
     ],
   },
