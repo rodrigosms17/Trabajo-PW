@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
-import { PRODUCTS } from "../../constants/products";
+import { useProducts } from "../../contexts/useProducts";
 
 import "./SearchResultsPage.css";
 
@@ -13,13 +12,14 @@ const SearchResultsPage = () => {
   const query = useQuery();
   const searchTerm = query.get("query").toLowerCase();
   const [sortCriteria, setSortCriteria] = useState("nombre");
+  const { products } = useProducts();
 
   const handleSortChange = (event) => {
     setSortCriteria(event.target.value);
   };
 
-  const sortProducts = (products, criteria) => {
-    return [...products].sort((a, b) => {
+  const sortProducts = (filteredProducts, criteria) => {
+    return filteredProducts.sort((a, b) => {
       if (criteria === "precio") {
         return a.precio - b.precio;
       }
@@ -27,13 +27,13 @@ const SearchResultsPage = () => {
     });
   };
 
-  const searchResults = PRODUCTS.filter((producto) =>
-    producto.marca.toLowerCase().includes(searchTerm),
-  ).sort((a, b) =>
-    sortCriteria === "precio"
-      ? a.price - b.price
-      : a.nombre.localeCompare(b.nombre),
-  );
+  const searchResults = products
+    .filter((producto) => producto.nombre.toLowerCase().includes(searchTerm))
+    .sort((a, b) =>
+      sortCriteria === "precio"
+        ? a.price - b.price
+        : a.nombre.localeCompare(b.nombre),
+    );
 
   return (
     <div className="search-results-container">
@@ -57,7 +57,6 @@ const SearchResultsPage = () => {
           <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Marca</th>
             <th>Precio</th>
           </tr>
         </thead>
@@ -66,7 +65,6 @@ const SearchResultsPage = () => {
             <tr key={result.id}>
               <td>{result.id}</td>
               <td>{result.nombre}</td>
-              <td>{result.marca}</td>
               <td className="precio">${result.price.toLocaleString()}</td>
             </tr>
           ))}

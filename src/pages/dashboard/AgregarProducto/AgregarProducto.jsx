@@ -1,65 +1,46 @@
-import { useEffect } from "react";
+import { Error } from "../../../components/Error";
+import { addProductSchema } from "../../../schemas/product";
 import { Sidebar } from "../components/Sidebar";
-
-import "./agregar-producto.css";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useProducts } from "../../../contexts/useProducts";
+import { useNavigate } from "react-router-dom";
 
 export function AgregarProductoPage() {
-  // const bodyStyle = {
-  //   margin: "0",
-  //   padding: "0",
-  //   backgroundColor: "rgb(234, 234, 234)",
-  //   fontFamily: "Arial, sans-serif",
-  // };
+  const { addProduct } = useProducts();
+  const navigate = useNavigate();
+
+  const form = useForm({
+    resolver: zodResolver(addProductSchema),
+  });
+
+  const onSubmit = form.handleSubmit((values) => {
+    addProduct(values);
+    navigate("/dashboard/products");
+  });
 
   return (
-    <div className="flex my-5 mx-12">
+    <div className="flex gap-4 my-5 mx-12">
       <Sidebar />
-      <div className="cara">
-        <header>
-          <p>Agregar Producto</p>
-        </header>
-        <div className="ingreso">
-          <div className="imagen">
-            <input type="text" />
-            <br />
-            <button>Agregar Imagen</button>
-          </div>
-
-          <div className="datos">
-            <h5>Nombre</h5>
-            <input type="text" />
-            <h5>Descripcion</h5>
-            <input className="desc" type="text" />
-            <h5>Caracteristicas</h5>
-            <input className="carac" type="text" />
-
-            <div className="datos2">
-              <p>
-                <h5>Marca</h5>
-                <input type="text" />
-              </p>
-              <p>
-                <h5>Serie</h5>
-                <input type="text" />
-              </p>
-              <p>
-                <h5>Precio</h5>
-                <p className="flex">
-                  S/ <input type="text" />
-                </p>
-              </p>
-              <p>
-                <h5>Tipo</h5>
-                <input type="text" />
-              </p>
-              <p>
-                <h5>Stock</h5>
-                <input type="text" />
-              </p>
-            </div>
-            <button> Guardar</button>
-          </div>
-        </div>
+      <div>
+        <h1>Agregar Producto</h1>
+        <form className="flex flex-col gap-2" onSubmit={onSubmit}>
+          <input type="text" placeholder="Image" {...form.register("img")} />
+          <Error>{form.formState.errors.img}</Error>
+          <input
+            type="text"
+            placeholder="Nombre"
+            {...form.register("nombre")}
+          />
+          <Error>{form.formState.errors.nombre}</Error>
+          <input
+            type="number"
+            placeholder="Precio"
+            {...form.register("price")}
+          />
+          <Error>{form.formState.errors.price}</Error>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );

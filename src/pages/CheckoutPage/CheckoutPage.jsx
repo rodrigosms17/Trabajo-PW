@@ -37,15 +37,13 @@ export function CheckoutPage() {
   });
   const navigate = useNavigate();
 
-  const metodoDeEnvio = watch("metodoDeEnvio");
-
-  const subtotal = cartProducts
+  const subtotalPrecio = cartProducts
     .map((product) => product.price * product.quantity)
     .reduce((partialSum, n) => partialSum + n, 0);
+  const envioPrecio = METODOS_DE_ENVIO[watch("metodoDeEnvio")]?.amount ?? 0;
+  const totalPrecio = subtotalPrecio + envioPrecio;
 
   const onSubmit = handleSubmit((values) => {
-    // TODO: save information
-
     for (const product of cartProducts) {
       removeFromCart(product);
     }
@@ -163,11 +161,15 @@ export function CheckoutPage() {
             <div className="flex flex-col p-4">
               <div className="flex justify-between">
                 <p>Subtotal</p>
-                <p>S/. {subtotal}</p>
+                <p>S/. {subtotalPrecio}</p>
               </div>
               <div className="flex justify-between">
                 <p>Envío</p>
-                <p>S/. {METODOS_DE_ENVIO[metodoDeEnvio]?.amount ?? 0}</p>
+                <p>S/. {envioPrecio}</p>
+              </div>
+              <div className="flex justify-between">
+                <p>Total</p>
+                <p>S/. {totalPrecio}</p>
               </div>
             </div>
             <button

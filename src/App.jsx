@@ -68,11 +68,17 @@ const router = createBrowserRouter([
         </Providers>
       </Layout>
     ),
+    errorElement: (
+      <Layout>
+        <Providers>
+          <NotFound />
+        </Providers>
+      </Layout>
+    ),
     children: [
       {
         path: "/",
         element: <Main />,
-        errorElement: <NotFound />,
       },
       {
         path: "/contactus",

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export function CartPage() {
   const { cartProducts, savedProducts } = useCart();
 
-  const totalPrice = cartProducts
+  const subtotalPrice = cartProducts
     .map((product) => product.price * product.quantity)
     .reduce((partialSum, n) => partialSum + n, 0);
 
@@ -23,7 +23,7 @@ export function CartPage() {
           <CartProduct key={product.id} product={product} type="cart" />
         ))}
         <div className="checkout-container">
-          <h4>Total: S/ {totalPrice}</h4>
+          <h4>Subtotal: S/ {subtotalPrice}</h4>
           <div className="checkout-button">
             <Link to="/checkout">Checkout</Link>
           </div>

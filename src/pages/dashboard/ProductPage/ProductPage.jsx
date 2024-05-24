@@ -1,53 +1,66 @@
-import "./product-page.css";
+import { Error } from "../../../components/Error";
+import { addProductSchema } from "../../../schemas/product";
+import { Sidebar } from "../components/Sidebar";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useProducts } from "../../../contexts/useProducts";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useMemo } from "react";
 
-export const ProductPage = () => {
-  return (
-    <>
-      <div className="cuerpo">
-        <div className="tienda">
-          {" "}
-          <p> Titulo de Producto: Puede ser bastante largo</p>
-          <p>Por:Hasbro - Sere: Avegers Endgame</p>{" "}
-        </div>
-        <div className="parte1">
-          <div className="imagen2">
-            <input type="text" />
-          </div>
-          <div className=" precio">
-            <div className="informacion">
-              <p>Disponible</p>
-              <div className="precio2">
-                <h3>S/88.99</h3>
-                <button> Añadir al carrito</button>
-                <p>cantidad</p>
-                <p>- +</p>
-                <a href=""> ver metodos de envios disponibles</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className=" texto">
-          <h4>Descripcion</h4>
-          <p>
-            {" "}
-            Un texto es una composición de signos codificados en un sistema de
-            escritura que forma una unidad de sentido. También es una
-            composición de caracteres imprimibles generados por un algoritmo de
-            cifrado que, aunque no tienen sentido para cualquier persona, sí
-            puede ser descifrado por su destinatario original.
-          </p>
-        </div>
-
-        <div className="caracteristica">
-          <h3>Caracteristicas del Producto</h3>
-          <ul className="custom-list">
-            <li>Mide </li>
-            <li>hecho</li>
-            <li>arti</li>
-            <li>asda</li>
-          </ul>
-        </div>
-      </div>
-    </>
+export function ProductPage() {
+  const location = useLocation();
+  const productId = useMemo(
+    () =>
+      Number(location.pathname.slice(location.pathname.lastIndexOf("/") + 1)),
+    [location.pathname],
   );
-};
+  const { products, editProduct } = useProducts();
+  const product = useMemo(
+    () => products.find((p) => p.id === productId),
+    [products, productId],
+  );
+  const navigate = useNavigate();
+
+  const form = useForm({
+    resolver: zodResolver(addProductSchema),
+  });
+
+  const onSubmit = form.handleSubmit((values) => {
+    editProduct({ ...values, id: productId });
+    navigate("/dashboard/products");
+  });
+
+  useEffect(() => {
+    if (product) {
+      form.setValue("img", product.img);
+      form.setValue("nombre", product.nombre);
+      form.setValue("price", String(product.price));
+    }
+  }, [product]);
+
+  return (
+    <div className="flex gap-4 my-5 mx-12">
+      <Sidebar />
+      <div>
+        <h1>Editar Producto</h1>
+        <form className="flex flex-col gap-2" onSubmit={onSubmit}>
+          <input type="text" placeholder="Image" {...form.register("img")} />
+          <Error>{form.formState.errors.img}</Error>
+          <input
+            type="text"
+            placeholder="Nombre"
+            {...form.register("nombre")}
+          />
+          <Error>{form.formState.errors.nombre}</Error>
+          <input
+            type="number"
+            placeholder="Precio"
+            {...form.register("price")}
+          />
+          <Error>{form.formState.errors.price}</Error>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  );
+}
