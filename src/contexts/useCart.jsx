@@ -1,8 +1,12 @@
 import { createContext, useContext, useState } from "react";
+import { AuthContext } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const CartContext = createContext(undefined);
 
 export function CartProvider({ children }) {
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [cartProducts, setCartProducts] = useState([]);
   const [savedProducts, setSavedProducts] = useState([]);
 
@@ -20,6 +24,11 @@ export function CartProvider({ children }) {
   };
 
   const addToCart = (product) => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
     const i = cartProducts.findIndex((p) => p.id === product.id);
     const productAlreadyInCart = i !== -1;
 
