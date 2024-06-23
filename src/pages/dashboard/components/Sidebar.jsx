@@ -13,14 +13,14 @@ export function Sidebar() {
           </li>
           <li>
             {/* TODO */}
-            <Link to="/dashboard/users">Usuarios registrados</Link>
+            <Link to="/admin/users">Usuarios registrados</Link>
           </li>
           <li>
             <Link to="/dashboard/products">Productos</Link>
           </li>
           <li>
             {/* TODO */}
-            <Link to="/dashboard/orders">Ordenes</Link>
+            <Link to="/admin/orders">Ordenes</Link>
           </li>
           <li>
             {/* TODO */}
