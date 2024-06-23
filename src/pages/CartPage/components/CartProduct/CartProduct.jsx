@@ -35,7 +35,7 @@ export function CartProduct({ product, type }) {
 
   return (
     <div className="flex gap-4 bg-white p-4">
-      <img src={product.img} className="aspect-square" />
+      <img src={product.img} className="aspect-square w-[250px]" />
       <div className="flex-1">
         <h3>{product.nombre}</h3>
         <div className="flex gap-4">

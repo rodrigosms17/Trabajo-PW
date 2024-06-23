@@ -28,6 +28,9 @@ const Header = () => {
           </a>
         </section>
         <div className="separacion">
+          <Link className="right" to="/dashboard">
+            Dashboard
+          </Link>
           <Link className="right" to="/cart">
             Cart
           </Link>

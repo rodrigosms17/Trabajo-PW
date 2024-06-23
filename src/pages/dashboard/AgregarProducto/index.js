@@ -1,0 +1,1 @@
+export { AgregarProductoPage } from "./AgregarProducto";

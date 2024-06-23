@@ -1,99 +1,86 @@
-import NikeImg from "../assets/nike.webp";
-import AdidasImg from "../assets/adidas.jpg";
-import PumaImg from "../assets/puma.avif";
-import ReebokImg from "../assets/reebok.webp";
-import NikePinkImg from "../assets/nike-pink.webp";
-import VansImg from "../assets/vans.webp";
-import ConverseImg from "../assets/converse.jpg";
-import UnderArmorImg from "../assets/under-armor.webp";
-import AsicsImg from "../assets/asics.webp";
-import SkechersImg from "../assets/skechers.jpg";
-import FilaImg from "../assets/fila.jpg";
-import SalomanImg from "../assets/saloman.jpg";
-
-export const PRODUCTS = [
+export const PREEXISTING_PRODUCTS = [
   {
     id: 1,
     nombre: "Nike Air Max",
     marca: "Nike",
     price: 120,
-    img: NikeImg,
+    img: "https://oechsle.vteximg.com.br/arquivos/ids/16376693-1000-1000/image-1969b165d22842098cf3e3e9433eec70.jpg?v=638316302667500000",
   },
   {
     id: 2,
     nombre: "Adidas Ultraboost",
     marca: "Adidas",
     price: 150,
-    img: AdidasImg,
+    img: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/4e894c2b76dd4c8e9013aafc016047af_9366/Superstar_Shoes_White_FV3284_01_standard.jpg",
   },
   {
     id: 3,
     nombre: "Puma RS-X",
     marca: "Puma",
     price: 100,
-    img: PumaImg,
+    img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/395205/02/sv01/fnd/ZAF/w/640/h/640/fmt/png",
   },
   {
     id: 4,
     nombre: "Reebok Classic Leather",
     marca: "Reebok",
     price: 80,
-    img: ReebokImg,
+    img: "https://reebok.bynder.com/transform/3f5a0f7b-c62f-4f45-b424-166226a4ff5b/100000155_SLC_eCom-tif?io=transform:scale,width:600",
   },
   {
     id: 5,
     nombre: "New Balance 574",
     marca: "New Balance",
     price: 90,
-    img: NikePinkImg,
+    img: "https://nb.scene7.com/is/image/NB/u9060gry_nb_02_i?$pdpflexf2$&wid=440&hei=440",
   },
   {
     id: 6,
     nombre: "Vans Old Skool",
     marca: "Vans",
     price: 70,
-    img: VansImg,
+    img: "https://images.vans.com/is/image/Vans/VN000EE3_BKA_HERO?wid=800&hei=1004&fmt=jpeg&qlt=50&resMode=sharp2&op_usm=0.9,1.5,8,0",
   },
   {
     id: 7,
     nombre: "Converse Chuck Taylor All Star",
     marca: "Converse",
     price: 60,
-    img: ConverseImg,
+    img: "https://i.ebayimg.com/images/g/gPAAAOSwo6xg55kM/s-l500.jpg",
   },
   {
     id: 8,
     nombre: "Under Armour HOVR Phantom",
     marca: "Under Armour",
     price: 130,
-    img: UnderArmorImg,
+    img: "https://underarmour.scene7.com/is/image/Underarmour/3024590-001_DEFAULT?rp=standard-30pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=85&resMode=sharp2&cache=on%2Con&bgc=f0f0f0&wid=566&hei=708&size=536%2C688",
   },
   {
     id: 9,
     nombre: "Asics Gel-Kayano",
     marca: "Asics",
     price: 160,
-    img: AsicsImg,
+    img: "https://images.asics.com/is/image/asics/1012B182_002_SR_RT_GLB?$sfcc-product$",
   },
   {
     id: 10,
     nombre: "Skechers Go Walk",
     marca: "Skechers",
     price: 75,
-    img: SkechersImg,
+    img: "https://www.skechers.in/on/demandware.static/-/Sites-skechers_india/default/dwf9cf0f55/images/large/196642720106-1.jpg",
   },
   {
     id: 11,
     nombre: "Fila Disruptor",
     marca: "Fila",
     price: 110,
-    img: FilaImg,
+    img: "https://www.fila.com/dw/image/v2/AAEJ_PRD/on/demandware.static/-/Sites-FilaUSACatalogID/default/dw8fd687d1/images/ProductImages/5FM00002_125_01_e.jpg?sw=523&sh=785&sm=fit",
   },
   {
     id: 12,
     nombre: "Salomon Speedcross",
     marca: "Salomon",
     price: 140,
-    img: SalomanImg,
+    img: "https://miro.medium.com/v2/resize:fit:900/1*xk74UbbRjGFxLHmWlbs90g.jpeg",
   },
 ];

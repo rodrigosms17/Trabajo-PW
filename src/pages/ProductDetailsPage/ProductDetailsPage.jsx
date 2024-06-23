@@ -1,13 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../../contexts/useCart";
-import { PRODUCTS } from "../../constants/products";
+import { useProducts } from "../../contexts/useProducts";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const { products } = useProducts();
 
-  const product = PRODUCTS.find((p) => p.id === Number(id));
+  const product = products.find((p) => p.id === Number(id));
 
   return (
     <div className="flex flex-col text-center items-center">
