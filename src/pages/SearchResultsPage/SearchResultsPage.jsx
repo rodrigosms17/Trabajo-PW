@@ -2,7 +2,11 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useProducts } from "../../contexts/useProducts";
 
+import { PRODUCTS } from "../../constants/products";
+
+
 import "./SearchResultsPage.css";
+
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -35,6 +39,7 @@ const SearchResultsPage = () => {
         : a.nombre.localeCompare(b.nombre),
     );
 
+
   return (
     <div className="search-results-container">
       <h2>Resultados de la búsqueda para "{searchTerm}":</h2>
@@ -65,6 +70,8 @@ const SearchResultsPage = () => {
             <tr key={result.id}>
               <td>{result.id}</td>
               <td>{result.nombre}</td>
+
+              <td>{result.marca}</td>
               <td className="precio">${result.price.toLocaleString()}</td>
             </tr>
           ))}
