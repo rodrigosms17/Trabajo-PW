@@ -1,5 +1,5 @@
 import express from 'express';
-import controller from '../controllers/order.js';
+import controller from '../controllers/curso.js';
 
 const router = express.Router();
 
@@ -8,5 +8,6 @@ router.get('/:id', controller.findOne);
 router.post('/', controller.create);
 router.delete('/:id', controller.remove);
 router.put('/', controller.update);
+
 
 export default router;

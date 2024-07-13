@@ -1,49 +1,43 @@
-import model from '../models/order.js';
+import orders from '../models/order.js';
 import userRepository from './user.js';
 import productRepository from './product.js';
 
-let orders = [...model];
-let nroOrders = orders.length;
+let orderList = [...orders];
+let nroOrders = orderList.length;
 
 const findAll = () => {
-    const newOrders = orders.map(item => ({
-        ...item,
-        user: userRepository.findOne(item.userId),
-        products: item.products.map(product => ({
-            ...product,
-            details: productRepository.findOne(product.id)
-        }))
+    return orderList.map(order => ({
+        ...order,
+        user: userRepository.findOne(order.user.id),
+        products: order.products.map(product => productRepository.findOne(product.id))
     }));
-
-    return newOrders;
 }
 
 const create = (payload) => {
     nroOrders++;
     payload.id = nroOrders;
-    orders.push(payload);
+    orderList.push(payload);
     return payload;
 }
 
-const findOne = (id) => {
-    const result = orders.find(x => x.id === parseInt(id));
-    return result;
-}
+const findOne = (id) => orderList.find(order => order.id === parseInt(id));
 
 const remove = (id) => {
-    const index = orders.findIndex(item => item.id == id);
+    const index = orderList.findIndex(order => order.id === parseInt(id));
     if (index > -1) {
-        orders.splice(index, 1);
+        orderList.splice(index, 1);
         return true;
-    } else return false;
+    }
+    return false;
 }
 
 const update = (payload) => {
-    const index = orders.findIndex(item => item.id == payload.id);
+    const index = orderList.findIndex(order => order.id === payload.id);
     if (index > -1) {
-        orders[index] = payload;
+        orderList[index] = payload;
         return payload;
-    } else return null;
+    }
+    return null;
 }
 
 const repository = { findAll, create, findOne, remove, update };

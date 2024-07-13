@@ -1,16 +1,23 @@
 import express from 'express';
-import userRoutes from './src/routes/user.js';
-import orderRoutes from './src/routes/order.js';
-import productRoutes from './src/routes/product.js';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+
+import userRouter from './src/routes/user.js';
+import orderRouter from './src/routes/order.js';
+import productRouter from './src/routes/product.js';
 
 const app = express();
-const port = 3001;
+app.use(bodyParser.json());
+app.use(cors());
 
-app.use(express.json());
-app.use('/api/users', userRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/products', productRoutes);
+app.get('/', (req, res) => {
+    return res.json({ message: "Hello World", code: "201" });
+});
 
-app.listen(port, () => {
-    console.log(`Servidor en ejecución en http://localhost:${port}`);
+app.use('/user', userRouter);
+app.use('/order', orderRouter);
+app.use('/product', productRouter);
+
+app.listen(3001, () => {
+    console.log('Server is running on port 3001');
 });
