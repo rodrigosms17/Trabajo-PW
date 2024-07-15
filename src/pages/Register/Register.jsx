@@ -1,29 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
-import { AuthContext } from "../../AuthContext";
+import { useUser } from "../../contexts/useUser";
 
 const Register = () => {
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [email, setEmail] = useState("");
+  const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const { register, login } = useContext(AuthContext);
+  const { register, login } = useUser();
   const navigate = useNavigate();
 
-  const handleRegistro = (e) => {
+  const handleRegistro = async (e) => {
     e.preventDefault();
     if (password != confirmPassword) {
       setError("Las contraseñas no coinciden");
-    } else {
-      setError("Cuenta creada satisfactoriamente");
+      return;
     }
 
-    const usr = { email, password };
-    const err = register(usr);
-    login(usr);
+    const usr = { usuario, password };
+
+    const err = await register(usr);
+    await login(usr);
 
     if (!err) {
       navigate("/");
@@ -39,31 +37,11 @@ const Register = () => {
         <h2 className="unique-register-title">Register</h2>
         <form onSubmit={handleRegistro} className="register-form">
           <label>
-            Nombre:
+            Usuario:
             <input
-              type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            Apellido:
-            <input
-              type="text"
-              value={apellido}
-              onChange={(e) => setApellido(e.target.value)}
-              required
-            />
-          </label>
-          <br />
-          <label>
-            Correo electrónico:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="usuario"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
               required
             />
           </label>

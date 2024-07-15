@@ -1,21 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthContext";
+import { useUser } from "../../contexts/useUser";
 import { Link } from "react-router-dom";
 
 import "./Login.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login } = useUser();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const userData = { email, password };
-    const err = login(userData);
+
+    const err = await login({ usuario, password, rol: "user" });
     setLoginError(err);
 
     if (!err) {
@@ -29,11 +29,11 @@ const Login = () => {
         <h2 className="login-title">LOG IN</h2>
         <form onSubmit={handleLogin} className="login-form">
           <label>
-            Correo electrónico:
+            Usuario:
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="usuario"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
               required
             />
           </label>
