@@ -3,9 +3,8 @@ import { addProductSchema } from "../../../schemas/product";
 import { Sidebar } from "../components/Sidebar";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useProducts } from "../../../contexts/useProducts";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export function ProductPage() {
   const location = useLocation();
@@ -14,21 +13,26 @@ export function ProductPage() {
       Number(location.pathname.slice(location.pathname.lastIndexOf("/") + 1)),
     [location.pathname],
   );
-  const { products, editProduct } = useProducts();
-  const product = useMemo(
-    () => products.find((p) => p.id === productId),
-    [products, productId],
-  );
   const navigate = useNavigate();
+  const [product, setProduct] = useState(undefined);
 
   const form = useForm({
     resolver: zodResolver(addProductSchema),
   });
 
   const onSubmit = form.handleSubmit((values) => {
-    editProduct({ ...values, id: productId });
+    fetch(`http://localhost:8080/productos/${productId}`, {
+      method: "PUT",
+      body: values,
+    });
     navigate("/dashboard/products");
   });
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/productos/${productId}`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data));
+  }, []);
 
   useEffect(() => {
     if (product) {

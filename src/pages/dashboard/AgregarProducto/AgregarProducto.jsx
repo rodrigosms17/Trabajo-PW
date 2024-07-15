@@ -3,11 +3,21 @@ import { addProductSchema } from "../../../schemas/product";
 import { Sidebar } from "../components/Sidebar";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useProducts } from "../../../contexts/useProducts";
 import { useNavigate } from "react-router-dom";
 
+const createProduct = (values) => {
+  return fetch("http://localhost:8080/productos", {
+    method: "POST",
+    body: JSON.stringify(values),
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 export function AgregarProductoPage() {
-  const { addProduct } = useProducts();
   const navigate = useNavigate();
 
   const form = useForm({
@@ -15,18 +25,16 @@ export function AgregarProductoPage() {
   });
 
   const onSubmit = form.handleSubmit((values) => {
-    addProduct(values);
+    createProduct({ ...values, serie_id: 1 });
     navigate("/dashboard/products");
   });
 
   return (
-    <div className="flex gap-4 my-5 mx-12">
+    <div className="flex my-5 mx-12">
       <Sidebar />
       <div>
         <h1>Agregar Producto</h1>
         <form className="flex flex-col gap-2" onSubmit={onSubmit}>
-          <input type="text" placeholder="Image" {...form.register("img")} />
-          <Error>{form.formState.errors.img}</Error>
           <input
             type="text"
             placeholder="Nombre"
@@ -36,9 +44,17 @@ export function AgregarProductoPage() {
           <input
             type="number"
             placeholder="Precio"
-            {...form.register("price")}
+            {...form.register("precio")}
           />
           <Error>{form.formState.errors.price}</Error>
+          <input type="text" placeholder="Marca" {...form.register("marca")} />
+          <Error>{form.formState.errors.marca}</Error>
+          <textarea
+            type="text"
+            placeholder="Descripción"
+            {...form.register("descripcion")}
+          />
+          <Error>{form.formState.errors.descripcion}</Error>
           <button type="submit">Submit</button>
         </form>
       </div>

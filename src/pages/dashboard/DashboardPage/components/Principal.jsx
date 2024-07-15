@@ -1,53 +1,44 @@
+import { useEffect, useState } from "react";
 import "./principal.css";
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 
 export const Principal = () => {
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [ordenes, setOrdenes] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [productos, setProductos] = useState([]);
 
-  const handleButtonClick = () => {
-    setShowCalendar(!showCalendar);
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    setShowCalendar(false);
-  };
+  useEffect(() => {
+    fetch("http://localhost:8080/ordenes")
+      .then((res) => res.json())
+      .then((data) => setOrdenes(data));
+    fetch("http://localhost:8080/usuarios")
+      .then((res) => res.json())
+      .then((data) => setUsuarios(data));
+    fetch("http://localhost:8080/productos")
+      .then((res) => res.json())
+      .then((data) => setProductos(data));
+  }, []);
 
   return (
     <>
       <div className="muestra">
         <header>
           <p>Dashboard</p>
-          <button onClick={handleButtonClick}>
-            <p>Cambiar Fecha o Periodo</p>
-          </button>
         </header>
 
         <div className="dashboard">
           <div>
-            <h2>68</h2>
-            <p>Ordenes del día de hoy</p>
+            <h2>{ordenes.length}</h2>
+            <p>Ordenes</p>
           </div>
           <div>
-            <h2>12</h2>
-            <p>Usuarios nuevos</p>
+            <h2>{usuarios.length}</h2>
+            <p>Usuarios</p>
           </div>
           <div>
-            <h2>S/ 13,500.00</h2>
-            <p>Ingresos de hoy</p>
+            <h2>{productos.length}</h2>
+            <p>Productos</p>
           </div>
         </div>
-
-        {showCalendar && (
-          <div className="calendar-container">
-            <DatePicker
-              selectedDate={selectedDate}
-              onDateChange={handleDateChange}
-            />
-          </div>
-        )}
       </div>
     </>
   );
