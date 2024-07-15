@@ -1,15 +1,32 @@
 import { CartProduct } from "./components/CartProduct";
 import { Separator } from "../../components/Separator";
-import { useCart } from "../../contexts/useCart";
 
 import "./cart-page.css";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useUser } from "../../contexts/useUser";
 
 export function CartPage() {
-  const { cartProducts, savedProducts } = useCart();
+  const { user } = useUser();
+  const [cart, setCart] = useState(undefined);
+
+  useEffect(() => {
+    if (user) {
+      fetch(`http://localhost:8080/carritos/${user.carrito_id}`)
+        .then((res) => res.json())
+        .then((data) => setCart(data));
+    }
+  }, [user]);
+
+  if (!cart) {
+    return null;
+  }
+
+  const cartProducts = cart.items.filter((item) => item.estado === "in-cart");
+  const savedProducts = cart.items.filter((item) => item.estado === "saved");
 
   const subtotalPrice = cartProducts
-    .map((product) => product.price * product.quantity)
+    .map((product) => product.precio * product.cantidad)
     .reduce((partialSum, n) => partialSum + n, 0);
 
   return (
@@ -20,7 +37,7 @@ export function CartPage() {
           <h2>Items disponibles para Envío</h2>
         </Separator>
         {cartProducts.map((product) => (
-          <CartProduct key={product.id} product={product} type="cart" />
+          <CartProduct key={product.id} product={product} />
         ))}
         <div className="checkout-container">
           <h4>Subtotal: S/ {subtotalPrice}</h4>
@@ -34,7 +51,7 @@ export function CartPage() {
           <h2>Guardado para después</h2>
         </Separator>
         {savedProducts.map((product) => (
-          <CartProduct key={product.id} product={product} type="saved" />
+          <CartProduct key={product.id} product={product} />
         ))}
       </div>
     </div>

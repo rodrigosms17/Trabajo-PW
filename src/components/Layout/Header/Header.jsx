@@ -37,9 +37,6 @@ const Header = () => {
           <Link className="right" to="/ayuda">
             Ayuda
           </Link>
-          <Link>
-            <button className="MiCuentaButton">Mi Cuenta</button>
-          </Link>
         </div>
       </div>
       <div>

@@ -1,31 +1,3 @@
-// <<<<<<< HEAD
-// import React from 'react';
-// import Header from './components/Header/Header';
-// import Post from './components/Post/Post';
-// import './App.css';
-// import { useUser } from './context/User';
-//
-// function App() {
-//   const { user } = useUser();
-//
-//   const posts = [
-//
-//   ];
-//
-//   return (
-//     <>
-//       <Header />
-//       {user.usuario === 'admin' ? (
-//         // Si es administrador, redirigir a la página de lista de usuarios o Lista de Ordenes Ordenes
-//         <UserListPage />
-//       ) : (
-//         <div>
-//           {posts.map((item) => (
-//             <Post {...item} key={item.titulo} />
-//           ))}
-//         </div>
-//       )}
-// =======
 import Main from "./components/Main/Main";
 import NotFound from "./pages/NotFound.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
@@ -58,6 +30,7 @@ import OrderDetail from "./routes/OrderDetail.jsx";
 
 import "./App.css";
 import "./tailwind.css";
+import { ProtectedRoute } from "./components/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -86,15 +59,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <CartPage />,
+        element: (
+          <ProtectedRoute>
+            <CartPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/checkout",
-        element: <CheckoutPage />,
+        element: (
+          <ProtectedRoute>
+            <CheckoutPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/order/:id",
-        element: <OrderPage />,
+        element: (
+          <ProtectedRoute>
+            <OrderPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/search-results",
@@ -134,19 +119,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashboardPage />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <DashboardPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/dashboard/products",
-        element: <DashboardProductsPage />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <DashboardProductsPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/dashboard/products/:id",
-        element: <DashboardProductPage />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <DashboardProductPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/dashboard/agregar",
-        element: <DashboardAddProductPage />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <DashboardAddProductPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/recover-password",
@@ -158,19 +159,35 @@ const router = createBrowserRouter([
       },
       {
         path: "admin/users",
-        element: <UserList />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <UserList />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "admin/users/:id",
-        element: <UserDetail />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <UserDetail />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "admin/orders",
-        element: <OrderList />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <OrderList />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "admin/orders/:id",
-        element: <OrderDetail />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <OrderDetail />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

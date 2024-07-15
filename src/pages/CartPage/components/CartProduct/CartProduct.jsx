@@ -1,36 +1,44 @@
 import { useState } from "react";
-import { useCart } from "../../../../contexts/useCart";
 
-export function CartProduct({ product, type }) {
-  const {
-    changeProductQuantity,
-    removeFromCart,
-    removeFromSaved,
-    moveToCart,
-    moveToSaved,
-  } = useCart();
+const removeFromCart = ({ carrito_id, producto_id }) => {
+  fetch(`http://localhost:8080/carritos/${carrito_id}/items/${producto_id}`, {
+    method: "DELETE",
+  });
+};
+
+const updateProductItem = ({ producto_id, estado, cantidad }) => {
+  fetch(`http://localhost:8080/carritos/items/${producto_id}`, {
+    method: "PUT",
+    body: JSON.stringify({ estado, cantidad }),
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+export function CartProduct({ product }) {
   const [previewProductQuantity, setPreviewProductQuantity] = useState(
-    product.quantity,
+    product.cantidad,
   );
 
-  const remove = () => {
-    if (type === "cart") {
-      removeFromCart(product);
+  const remove = async () => {
+    removeFromCart(product);
+  };
+
+  const move = async () => {
+    if (product.estado === "in-cart") {
+      updateProductItem({ ...product, estado: "saved" });
     }
 
-    if (type === "saved") {
-      removeFromSaved(product);
+    if (product.estado === "saved") {
+      updateProductItem({ ...product, estado: "in-cart" });
     }
   };
 
-  const move = () => {
-    if (type === "cart") {
-      moveToSaved(product);
-    }
-
-    if (type === "saved") {
-      moveToCart(product);
-    }
+  const changeProductQuantity = (newQuantity) => {
+    updateProductItem({ ...product, cantidad: newQuantity });
   };
 
   return (
@@ -42,8 +50,8 @@ export function CartProduct({ product, type }) {
           <button onClick={() => remove(product)}>Eliminar</button>
           <span>|</span>
           <button onClick={() => move(product)}>
-            {type === "cart" && "Guardar para después"}
-            {type === "saved" && "Mover al carrito"}
+            {product.estado === "in-cart" && "Guardar para después"}
+            {product.estado === "saved" && "Mover al carrito"}
           </button>
         </div>
       </div>
@@ -58,18 +66,18 @@ export function CartProduct({ product, type }) {
           }
 
           setPreviewProductQuantity(newQuantity);
-          changeProductQuantity(product, newQuantity);
+          changeProductQuantity(newQuantity);
         }}
         className="h-fit py-2 self-center"
         type="number"
       />
       <div className="flex flex-col">
         <h3>Precio</h3>
-        <p>S/ {product.price}</p>
+        <p>S/ {product.precio}</p>
       </div>
       <div className="flex flex-col">
         <h3>Subtotal</h3>
-        <p>S/ {product.price * product.quantity}</p>
+        <p>S/ {product.precio * product.cantidad}</p>
       </div>
     </div>
   );

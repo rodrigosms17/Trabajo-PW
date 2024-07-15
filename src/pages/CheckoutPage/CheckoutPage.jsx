@@ -1,20 +1,63 @@
-import { useCart } from "../../contexts/useCart";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "../../components/Separator";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import "./checkout-page.css";
+import { useUser } from "../../contexts/useUser";
+
+const createOrder = ({
+  usuario_id,
+  tipo_envio,
+  subtotal,
+  impuestos,
+  total,
+}) => {
+  return fetch("http://localhost:8080/ordenes/", {
+    method: "POST",
+    body: JSON.stringify({
+      usuario_id,
+      tipo_envio,
+      subtotal,
+      impuestos,
+      total,
+    }),
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+const removeFromCart = ({ carrito_id, producto_id }) => {
+  fetch(`http://localhost:8080/carritos/${carrito_id}/items/${producto_id}`, {
+    method: "DELETE",
+    mode: "cors",
+  });
+};
+
+const updateDireccion = (direccionId, direccion) => {
+  return fetch(`http://localhost:8080/direcciones/${direccionId}`, {
+    method: "PUT",
+    body: JSON.stringify(direccion),
+    mode: "cors",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 const checkoutSchema = z.object({
   linea1: z.string().min(1),
-  linea2: z.string().min(1),
+  linea2: z.string(),
   distrito: z.string().min(1),
-  ciudad: z.string().min(1),
+  provincia: z.string().min(1),
   pais: z.string().min(1),
-  metodoDeEnvio: z.literal("economico").or(z.literal("prioritario")),
+  tipo_envio: z.literal("economico").or(z.literal("prioritario")),
 });
 
 const METODOS_DE_ENVIO = {
@@ -23,9 +66,22 @@ const METODOS_DE_ENVIO = {
 };
 
 export function CheckoutPage() {
+  const { user } = useUser();
   const [paymentMethod, setPaymentMethod] = useState("card"); // "card" or "qr"
+  const [cart, setCart] = useState(undefined);
+  const [direccion, setDireccion] = useState(undefined);
 
-  const { cartProducts, removeFromCart } = useCart();
+  useEffect(() => {
+    if (user) {
+      fetch(`http://localhost:8080/carritos/${user.carrito_id}`)
+        .then((res) => res.json())
+        .then((data) => setCart(data));
+      fetch(`http://localhost:8080/direcciones/${user.direccion_id}`)
+        .then((res) => res.json())
+        .then((data) => setDireccion(data));
+    }
+  }, [user]);
+
   const {
     register,
     handleSubmit,
@@ -37,18 +93,49 @@ export function CheckoutPage() {
   });
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (direccion) {
+      setValue("linea1", direccion.linea1);
+      setValue("linea2", direccion.linea2);
+      setValue("distrito", direccion.distrito);
+      setValue("provincia", direccion.provincia);
+      setValue("pais", direccion.pais);
+    }
+  }, [direccion]);
+
+  if (!cart) {
+    return null;
+  }
+
+  const cartProducts = cart.items.filter((item) => item.estado === "in-cart");
+
   const subtotalPrecio = cartProducts
-    .map((product) => product.price * product.quantity)
+    .map((product) => product.precio * product.cantidad)
     .reduce((partialSum, n) => partialSum + n, 0);
-  const envioPrecio = METODOS_DE_ENVIO[watch("metodoDeEnvio")]?.amount ?? 0;
+  const tipoEnvio = watch("tipo_envio");
+  const envioPrecio = METODOS_DE_ENVIO[tipoEnvio]?.amount ?? 0;
   const totalPrecio = subtotalPrecio + envioPrecio;
 
   const onSubmit = handleSubmit((values) => {
+    updateDireccion(user.direccion_id, values);
+
+    if (cartProducts.length === 0) {
+      return;
+    }
+
     for (const product of cartProducts) {
       removeFromCart(product);
     }
 
-    navigate("/order/1");
+    createOrder({
+      usuario_id: user.id,
+      tipo_envio: tipoEnvio,
+      subtotal: subtotalPrecio,
+      impuestos: 0,
+      total: totalPrecio,
+    })
+      .then((res) => res.json())
+      .then((data) => navigate(`/order/${data.id}`));
   });
 
   return (
@@ -81,16 +168,17 @@ export function CheckoutPage() {
             <Error error={errors.distrito} />
             <input
               className="p-4"
-              placeholder="Ciudad"
-              {...register("ciudad")}
+              placeholder="Provincia"
+              {...register("provincia")}
             />
-            <Error error={errors.ciudad} />
+            <Error error={errors.provincia} />
             <input className="p-4" placeholder="País" {...register("pais")} />
             <Error error={errors.pais} />
           </FormCard>
           <FormCard title="Pago" className="flex-1">
             <div>
               <input
+                disabled={true}
                 onChange={() => setPaymentMethod("qr")}
                 name="paymentMethod"
                 type="radio"
@@ -128,8 +216,8 @@ export function CheckoutPage() {
               ([method, { label, amount }]) => (
                 <div key={method}>
                   <input
-                    onChange={() => setValue("metodoDeEnvio", method)}
-                    name="metodoDeEnvio"
+                    onChange={() => setValue("tipo_envio", method)}
+                    name="tipo_envio"
                     type="radio"
                     id={`metodo-envio-${method}`}
                   />
@@ -140,7 +228,7 @@ export function CheckoutPage() {
               ),
             )}
           </div>
-          {errors.metodoDeEnvio && (
+          {errors.tipo_envio && (
             <Error error={{ message: "Must select one" }} />
           )}
         </FormCard>
@@ -150,9 +238,9 @@ export function CheckoutPage() {
               {cartProducts.map((product) => (
                 <div key={product.id} className="flex justify-between">
                   <p>
-                    {product.quantity} x {product.nombre}
+                    {product.cantidad} x {product.nombre}
                   </p>
-                  <p>S/. {(product.quantity ?? 1) * product.price}</p>
+                  <p>S/. {(product.cantidad ?? 1) * product.precio}</p>
                 </div>
               ))}
             </div>

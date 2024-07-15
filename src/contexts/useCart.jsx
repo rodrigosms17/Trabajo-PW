@@ -1,93 +1,29 @@
-import { createContext, useContext, useState } from "react";
-import { AuthContext } from "../AuthContext";
-import { useNavigate } from "react-router-dom";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
 
-const CartContext = createContext(undefined);
+const CartContext = createContext({});
 
-export function CartProvider({ children }) {
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
-  const [cartProducts, setCartProducts] = useState([]);
-  const [savedProducts, setSavedProducts] = useState([]);
+export const CartProvider = ({ children }) => {
+  const [cart, setCart] = useState(undefined);
 
-  const changeProductQuantity = (product, newQuantity) => {
-    const productInCart = !!cartProducts.find((p) => p.id === product.id);
-    if (!productInCart) {
-      return;
-    }
-
-    setCartProducts((products) =>
-      products.map((p) =>
-        p.id === product.id ? { ...product, quantity: newQuantity } : p,
-      ),
-    );
+  const refetch = () => {
+    //
   };
 
-  const addToCart = (product) => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
-
-    const i = cartProducts.findIndex((p) => p.id === product.id);
-    const productAlreadyInCart = i !== -1;
-
-    if (productAlreadyInCart) {
-      setCartProducts((products) => {
-        products[i] = { ...product, quantity: products[i].quantity + 1 };
-        return products;
-      });
-    } else {
-      setCartProducts((products) => [...products, { ...product, quantity: 1 }]);
-    }
+  const addToCart = () => {
+    //
   };
 
-  const removeFromCart = (productWithId) => {
-    setCartProducts((products) =>
-      products.filter((p) => p.id !== productWithId.id),
-    );
-  };
+  const value = useMemo(() => ({ cart, refetch }), [user]);
 
-  const removeFromSaved = (productWithId) => {
-    setSavedProducts((products) =>
-      products.filter((p) => p.id !== productWithId.id),
-    );
-  };
+  useEffect(() => {
+    //
+  }, [user]);
 
-  const moveToCart = (product) => {
-    setSavedProducts((products) => products.filter((p) => p.id !== product.id));
-    setCartProducts((products) => [...products, product]);
-  };
-
-  const moveToSaved = (product) => {
-    setCartProducts((products) => products.filter((p) => p.id !== product.id));
-    setSavedProducts((products) => [...products, product]);
-  };
-
-  return (
-    <CartContext.Provider
-      value={{
-        cartProducts,
-        savedProducts,
-        changeProductQuantity,
-        addToCart,
-        removeFromCart,
-        removeFromSaved,
-        moveToCart,
-        moveToSaved,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-
-  if (context === undefined) {
-    throw new Error("useCart() must be used within a <CartProvider />");
+  if (cart === undefined) {
+    return null;
   }
 
-  return context;
-}
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+};
+
+export const useCart = () => useContext(CartContext);

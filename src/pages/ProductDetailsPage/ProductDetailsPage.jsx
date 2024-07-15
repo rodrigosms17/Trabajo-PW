@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useCart } from "../../contexts/useCart";
-import { useProducts } from "../../contexts/useProducts";
+import { useUser } from "../../contexts/useUser";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
-  const { addToCart } = useCart();
-  const { products } = useProducts();
+  const { user } = useUser();
+  const [product, setProduct] = useState(undefined);
 
-  const product = products.find((p) => p.id === Number(id));
+  const addToCart = async (carritoId, product) => {
+    if (!carritoId) {
+      return;
+    }
+
+    fetch("http://localhost:8080/carritos/items", {
+      method: "POST",
+      body: JSON.stringify({
+        carrito_id: carritoId,
+        producto_id: product.id,
+        estado: "in-cart",
+        cantidad: 1,
+      }),
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/productos/${id}`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data));
+  }, []);
+
+  if (!product) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col text-center items-center">
@@ -19,10 +47,10 @@ const ProductDetailsPage = () => {
         alt={product.nombre}
       />
       <p>{product.description}</p>
-      <p>Precio: S/ {product.price}</p>
+      <p>Precio: S/ {product.precio}</p>
       <button
         className="px-8 py-4 bg-black rounded-md text-white border-0"
-        onClick={() => addToCart(product)}
+        onClick={() => addToCart(user.carrito_id, product)}
       >
         Añadir al Carrito
       </button>
