@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
-import { useProducts } from "../../contexts/useProducts";
 import { Product } from "../../components/Product";
+import { useEffect, useState } from "react";
 
 export function OrderPage() {
-  const { products } = useProducts();
+  const [products, setProducts] = useState([]);
 
   const suggestedProducts = products
     .sort(() => 0.5 - Math.random())
     .slice(0, 3);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/productos")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  });
 
   return (
     <div className="flex flex-col gap-4">
